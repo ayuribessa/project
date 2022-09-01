@@ -16,4 +16,8 @@ export class StudentService {
     async createStudent(student) {
         return this.repository.create(student);
     }
+
+    async updateStudent(id, student) {
+        return this.repository.update(id, student);
+    }
 };
