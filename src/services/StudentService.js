@@ -20,4 +20,8 @@ export class StudentService {
     async updateStudent(id, student) {
         return this.repository.update(id, student);
     }
+
+    async deleteStudent(id) {
+        return this.repository.delete(id);
+    }
 };

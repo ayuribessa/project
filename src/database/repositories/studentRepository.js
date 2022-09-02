@@ -11,10 +11,9 @@ export class StudentRepository {
 
     async findById(id) {
         const conn = await db.connect();
-        const query = "SELECT * FROM student WHERE id = ?"; //interrogação em vez do ${}, porque senão poderiamos injetar código js
-        const [student] = await conn.query(query, [id]);
+        const query = "DELETE FROM student WHERE id = ?"; //interrogação em vez do ${}, porque senão poderiamos injetar código js
+        await conn.query(query, [id]);
 
-        return student;
 
     }
 
@@ -41,5 +40,18 @@ export class StudentRepository {
 
         return student;
     }
+
+    async delete(id) {
+        const conn = await db.connect();
+        const query = "UPDATE student SET name = ?, dob = ? WHERE id = ?";
+        const [student] = await conn.query(query, [
+            studentDataToUpdate.name,
+            studentDataToUpdate.dob,
+            id
+        ]);
+
+        return student;
+    }
+
 }
 
